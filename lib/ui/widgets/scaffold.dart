@@ -1,5 +1,6 @@
 import 'package:animation_app/ui/common/app_colors.dart';
 import 'package:animation_app/ui/extension/media_query.dart';
+import 'package:animation_app/ui/extension/widget_extention.dart';
 import 'package:flutter/material.dart';
 
 class BaseScaffold extends StatelessWidget {
@@ -19,10 +20,10 @@ class BaseScaffold extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomCenter,
             colors: [
-              Appcolor.white,
-              Appcolor.white.withOpacity(0.47),
-              Appcolor.white.withOpacity(0.4),
-              Appcolor.white.withOpacity(0.04),
+              Appcolor.bgwhite.withOpacity(0.49),
+              Appcolor.bgwhite.withOpacity(0.47),
+              Appcolor.bgwhite.withOpacity(0.4),
+              Appcolor.bgwhite.withOpacity(0.04),
               Appcolor.primary.withOpacity(0.1),
               Appcolor.primary.withOpacity(0.19),
               Appcolor.primary.withOpacity(0.19),
@@ -32,14 +33,11 @@ class BaseScaffold extends StatelessWidget {
             ],
           ),
         ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: context.widthPercent(4),
-              vertical: context.heightPercent(10)),
-          child: Column(
-            children: items,
-          ),
-        ),
+        child: Column(
+          children: items,
+        ).paddingSymmetric(
+            horizontal: context.widthPercent(4),
+            vertical: context.heightPercent(5)),
       ),
     );
   }

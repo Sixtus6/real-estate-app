@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:animation_app/ui/extension/media_query.dart';
 import 'package:flutter/material.dart';
 
 const double _tinySize = 5.0;
@@ -27,7 +28,11 @@ Widget spacedDivider = const Column(
   ],
 );
 
-Widget verticalSpace(double height) => SizedBox(height: height);
+Widget verticalSpace(double height, BuildContext context) =>
+    SizedBox(height: context.heightPercent(height));
+
+Widget horizontalSpace(double width, BuildContext context) =>
+    SizedBox(width: context.widthPercent(width));
 
 double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;

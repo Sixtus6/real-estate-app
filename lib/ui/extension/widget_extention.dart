@@ -49,23 +49,6 @@ extension WidgetExtension on Widget? {
     );
   }
 
-  // void toast(
-  //   String? value, {
-  //   ToastGravity? gravity = ToastGravity.TOP,
-  //   length = Toast.LENGTH_SHORT,
-  //   Color? bgColor = red,
-  //   Color? textColor,
-  //   bool isError = false,
-  // }) {
-  //   Fluttertoast.showToast(
-  //     msg: value!,
-  //     gravity: gravity,
-  //     toastLength: length,
-  //     backgroundColor: !isError ? green : bgColor,
-  //     textColor: textColor,
-  //   );
-  // }
-
   /// return padding symmetric
   Padding paddingSymmetric({double vertical = 0.0, double horizontal = 0.0}) {
     return Padding(
