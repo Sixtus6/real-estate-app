@@ -1,3 +1,4 @@
+import 'package:animation_app/ui/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:animation_app/ui/common/app_colors.dart';
@@ -14,7 +15,17 @@ class HomeView extends StackedView<HomeViewModel> {
     HomeViewModel viewModel,
     Widget? child,
   ) {
-    return BaseScaffold();
+    return BaseScaffold(
+      items: [
+        Row(
+          children: [
+            Container(
+              child: const Text("Saint Peterburg"),
+            )
+          ],
+        )
+      ],
+    );
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:animation_app/ui/common/app_colors.dart';
+import 'package:animation_app/ui/extension/media_query.dart';
 import 'package:flutter/material.dart';
 
 class BaseScaffold extends StatelessWidget {
@@ -32,7 +33,9 @@ class BaseScaffold extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.symmetric(
+              horizontal: context.widthPercent(4),
+              vertical: context.heightPercent(10)),
           child: Column(
             children: items,
           ),

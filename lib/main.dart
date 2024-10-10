@@ -1,3 +1,4 @@
+import 'package:animation_app/ui/common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:animation_app/app/app.bottomsheets.dart';
 import 'package:animation_app/app/app.dialogs.dart';
@@ -8,8 +9,7 @@ import 'package:stacked_services/stacked_services.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
-  setupDialogUi();
-  setupBottomSheetUi();
+
   runApp(const MainApp());
 }
 
@@ -21,6 +21,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.homeView,
+      theme: appTheme,
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
       navigatorObservers: [
