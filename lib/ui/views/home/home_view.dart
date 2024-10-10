@@ -47,14 +47,23 @@ class HomeView extends StackedView<HomeViewModel> {
               ),
             ),
             Container(
-              width: 45,
-              height: 45,
+              width: 55,
+              height: 55,
               decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Appcolor.primary,
+                    Appcolor.primary,
+                  ],
+                ),
                 shape: BoxShape.circle, // Circular shape
                 color: Colors.orangeAccent, // Background color
               ),
-              child: Image.network(
-                  'assets/images/profile.jpg'), // Profile image path
+              child: Image.asset(
+                'assets/image/user.png',
+              ), // Profile image path
             ),
           ],
         )
