@@ -32,7 +32,7 @@ void main() {
         verify(bottomSheetService.showCustomSheet(
           variant: BottomSheetType.notice,
           title: ksHomeBottomSheetTitle,
-          description: ksHomeBottomSheetDescription,
+          description: 'ksHomeBottomSheetDescription',
         ));
       });
     });
