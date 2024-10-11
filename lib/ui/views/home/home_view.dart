@@ -1,4 +1,5 @@
 import 'package:animation_app/ui/common/app_image.dart';
+import 'package:animation_app/ui/common/app_strings.dart';
 import 'package:animation_app/ui/common/custom_text_styles.dart';
 import 'package:animation_app/ui/extension/media_query.dart';
 import 'package:animation_app/ui/extension/widget_extention.dart';
@@ -42,7 +43,7 @@ class HomeView extends StackedView<HomeViewModel> {
               children: [
                 const PropertyCardWidget(
                     imagePath: AppImage.house2,
-                    address: "Glad",
+                    address: AppString.house,
                     height: 27,
                     width: double.infinity),
                 verticalSpace(1.3, context),
@@ -52,7 +53,7 @@ class HomeView extends StackedView<HomeViewModel> {
                       children: [
                         PropertyCardWidget(
                             imagePath: AppImage.house3,
-                            address: "Utange lance",
+                            address: AppString.house3,
                             height: 37,
                             width: 45),
                       ],
@@ -62,13 +63,13 @@ class HomeView extends StackedView<HomeViewModel> {
                       children: [
                         const PropertyCardWidget(
                             imagePath: AppImage.house,
-                            address: "Utang`e lance",
+                            address: AppString.house1,
                             height: 18,
                             width: 47),
                         verticalSpace(1.2, context),
                         const PropertyCardWidget(
                             imagePath: AppImage.house1,
-                            address: "Utange lance",
+                            address: AppString.house2,
                             height: 18,
                             width: 47),
                       ],

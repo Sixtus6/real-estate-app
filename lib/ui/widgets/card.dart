@@ -58,9 +58,9 @@ class PropertyCardWidget extends StatelessWidget {
                   ),
                   Text(
                     address,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.black,
-                      fontSize: 16,
+                      fontSize: height == 27 ? 18 : 16,
                       fontWeight: FontWeight.bold,
                       decoration: TextDecoration.none,
                     ),
