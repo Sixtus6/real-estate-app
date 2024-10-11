@@ -1,3 +1,4 @@
+import 'package:animation_app/ui/common/app_image.dart';
 import 'package:animation_app/ui/common/custom_text_styles.dart';
 import 'package:animation_app/ui/extension/media_query.dart';
 import 'package:animation_app/ui/extension/widget_extention.dart';
@@ -19,11 +20,67 @@ class HomeView extends StackedView<HomeViewModel> {
     HomeViewModel viewModel,
     Widget? child,
   ) {
-    return BaseScaffold(
-      items: [
-        customAppBar(context),
-        contextBody(context),
-        PropertyCardWidget()
+    return Stack(
+      children: [
+        BaseScaffold(
+          items: [
+            customAppBar(context),
+            contextBody(context),
+          ],
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            height: context.heightPercent(68),
+            width: double.infinity,
+            decoration: const BoxDecoration(
+                color: Appcolor.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40),
+                    topRight: Radius.circular(40))),
+            child: Column(
+              children: [
+                const PropertyCardWidget(
+                    imagePath: AppImage.house2,
+                    address: "Glad",
+                    height: 27,
+                    width: double.infinity),
+                verticalSpace(1.3, context),
+                Row(
+                  children: [
+                    const Column(
+                      children: [
+                        PropertyCardWidget(
+                            imagePath: AppImage.house3,
+                            address: "Utange lance",
+                            height: 37,
+                            width: 45),
+                      ],
+                    ),
+                    Container().expand(),
+                    Column(
+                      children: [
+                        const PropertyCardWidget(
+                            imagePath: AppImage.house,
+                            address: "Utang`e lance",
+                            height: 18,
+                            width: 47),
+                        verticalSpace(1.2, context),
+                        const PropertyCardWidget(
+                            imagePath: AppImage.house1,
+                            address: "Utange lance",
+                            height: 18,
+                            width: 47),
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ).paddingSymmetric(
+                horizontal: context.widthPercent(3),
+                vertical: context.heightPercent(1.2)),
+          ),
+        )
       ],
     );
   }
@@ -35,12 +92,17 @@ class HomeView extends StackedView<HomeViewModel> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            verticalSpace(5, context),
-            Text(
-              "Hi, Marina",
-              style: CustomTextStyles.bodyStyle(
-                size: 26,
-                // fontWeight: FontWeight.w600
+            verticalSpace(4, context),
+            GestureDetector(
+              onTap: () {
+                print('object');
+              },
+              child: Text(
+                "Hi, Marina",
+                style: CustomTextStyles.bodyStyle(
+                  size: 26,
+                  // fontWeight: FontWeight.w600
+                ),
               ),
             ),
             Text(
@@ -50,7 +112,7 @@ class HomeView extends StackedView<HomeViewModel> {
                   // fontWeight: FontWeight.w600,
                   color: Colors.black),
             ),
-            verticalSpace(4.5, context),
+            verticalSpace(5.1, context),
             Row(
               children: [
                 Container(
@@ -185,7 +247,7 @@ class HomeView extends StackedView<HomeViewModel> {
             color: Colors.orangeAccent,
           ),
           child: Image.asset(
-            'assets/image/user.png',
+            AppImage.user,
           ),
         ),
       ],

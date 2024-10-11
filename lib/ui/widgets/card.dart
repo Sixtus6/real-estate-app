@@ -5,22 +5,28 @@ import 'package:flutter/material.dart';
 
 class PropertyCardWidget extends StatelessWidget {
   const PropertyCardWidget(
-      {Key? key, required this.imageUrl, required this.address})
+      {Key? key,
+      required this.imagePath,
+      required this.address,
+      required this.height,
+      required this.width})
       : super(key: key);
-  final String imageUrl;
+  final String imagePath;
   final String address;
+  final double height;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300, // Set appropriate width for the card
-      height: 200, // Set appropriate height for the card
+      width: context.widthPercent(width),
+      height: context.heightPercent(height),
       decoration: BoxDecoration(
         color: Colors.black,
-        borderRadius: BorderRadius.circular(20), // Rounded corners
+        borderRadius: BorderRadius.circular(25),
         image: DecorationImage(
-          image: NetworkImage(imageUrl), // Network image
-          fit: BoxFit.cover, // Ensure image covers the container
+          image: AssetImage(imagePath),
+          fit: BoxFit.cover,
         ),
       ),
       child: Stack(
@@ -47,19 +53,22 @@ class PropertyCardWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  SizedBox(
+                    width: context.widthPercent(1),
+                  ),
                   Text(
                     address,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.none,
                     ),
                   ),
-                  SizedBox(width: 8), // Space between the text and the button
                   CircleAvatar(
-                    radius: 30,
+                    radius: height == 27 ? 30 : 20,
                     backgroundColor: Appcolor.white,
-                    child: Icon(
+                    child: const Icon(
                       Icons.arrow_forward_ios,
                       size: 16,
                       color: Colors.grey,

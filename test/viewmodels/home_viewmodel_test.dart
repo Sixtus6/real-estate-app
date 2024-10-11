@@ -31,7 +31,7 @@ void main() {
         model.showBottomSheet();
         verify(bottomSheetService.showCustomSheet(
           variant: BottomSheetType.notice,
-          title: ksHomeBottomSheetTitle,
+          title: AppString.ksHomeBottomSheetTitle,
           description: 'ksHomeBottomSheetDescription',
         ));
       });
