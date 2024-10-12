@@ -13,6 +13,13 @@ class HomeViewModel extends BaseViewModel {
   bool showPropertyScroller = false;
   bool showNavbar = false;
 
+  int defaultNav = 2;
+
+  setCurrentNav(int val) {
+    defaultNav = val;
+    rebuildUi();
+  }
+
   List navIcons = <String>[
     AppImage.search,
     AppImage.messg,
@@ -28,15 +35,15 @@ class HomeViewModel extends BaseViewModel {
       print(showAppbarChildren);
       rebuildUi();
     });
-    Timer(Duration(milliseconds: 1800), () {
+    Timer(const Duration(milliseconds: 1800), () {
       showButtomSheet = triggerAppbar;
       rebuildUi();
     });
-    Timer(Duration(milliseconds: 2000), () {
+    Timer(const Duration(milliseconds: 2000), () {
       showPropertyScroller = triggerAppbar;
       rebuildUi();
     });
-    Timer(Duration(milliseconds: 2500), () {
+    Timer(const Duration(milliseconds: 2500), () {
       showNavbar = triggerAppbar;
       rebuildUi();
     });

@@ -82,10 +82,12 @@ class PropertyCardWidget extends StatelessWidget {
                     CircleAvatar(
                       radius: height == 27 ? 30 : 23,
                       backgroundColor: Appcolor.white,
-                      child: const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 16,
-                        color: Colors.grey,
+                      child: Center(
+                        child: const Icon(
+                          Icons.arrow_forward_ios,
+                          size: 16,
+                          color: Colors.grey,
+                        ),
                       ),
                     ).paddingRight(context.heightPercent(0.5)),
                   ],
