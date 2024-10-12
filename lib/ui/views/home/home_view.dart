@@ -27,7 +27,7 @@ class HomeView extends StackedView<HomeViewModel> {
         BaseScaffold(
           items: [
             customAppBar(context, viewModel),
-            contextBody(context),
+            contextBody(context, viewModel),
           ],
         ),
         stackedBottomSheet(),
@@ -80,7 +80,7 @@ customNavBar(BuildContext context, HomeViewModel model) {
   );
 }
 
-Row contextBody(BuildContext context) {
+Row contextBody(BuildContext context, HomeViewModel model) {
   return Row(
     children: [
       Column(
@@ -92,20 +92,38 @@ Row contextBody(BuildContext context) {
             onTap: () {
               print('object');
             },
-            child: Text(
-              "Hi, Marina",
-              style: CustomTextStyles.bodyStyle(
-                size: 26,
-                // fontWeight: FontWeight.w600
+            child: AnimatedOpacity(
+              opacity: model.showAppbarChildren ? 1.0 : 0.0,
+              duration: Duration(seconds: 1),
+              child: Text(
+                "Hi, Marina",
+                style: CustomTextStyles.bodyStyle(
+                  size: 26,
+                  // fontWeight: FontWeight.w600
+                ),
               ),
             ),
           ),
-          Text(
-            "let's select your\nperfect place",
-            style: CustomTextStyles.bodyStyle(
-                size: 32,
-                // fontWeight: FontWeight.w600,
-                color: Colors.black),
+          AnimatedOpacity(
+            opacity: model.showAppbarChildren ? 1.0 : 0.0,
+            duration: const Duration(seconds: 2),
+            curve: Curves.easeInOut,
+            child: AnimatedContainer(
+              duration: const Duration(seconds: 1),
+              curve: Curves.easeInOut,
+              transform: Matrix4.translationValues(
+                0,
+                model.showAppbarChildren ? 0 : 50,
+                0,
+              ),
+              child: const Text(
+                "let's select your\nperfect place",
+                style: TextStyle(
+                  fontSize: 32,
+                  color: Colors.black,
+                ),
+              ),
+            ),
           ),
           verticalSpace(5.1, context),
           Row(
@@ -238,9 +256,10 @@ Row customAppBar(BuildContext context, HomeViewModel model) {
             ),
           )),
       Container().expand(),
-      Container(
-        width: 55,
-        height: 55,
+      AnimatedContainer(
+        curve: Curves.easeInOut,
+        duration: Duration(seconds: model.appbarSecs),
+        width: model.triggerAppbar ? 55 : 0,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -249,16 +268,18 @@ Row customAppBar(BuildContext context, HomeViewModel model) {
               Appcolor.profileColor,
               Appcolor.profileColor,
               Appcolor.profileColorLinear,
-              Appcolor.profileColorLinear.withOpacity(0.01)
+              Appcolor.profileColorLinear.withOpacity(0.4),
             ],
           ),
           shape: BoxShape.circle,
-          color: Colors.orangeAccent,
         ),
-        child: Image.asset(
-          AppImage.user,
-        ),
-      ),
+        child: model.triggerAppbar
+            ? Image.asset(
+                AppImage.user,
+                fit: BoxFit.cover,
+              )
+            : const SizedBox.shrink(),
+      )
     ],
   );
 }
