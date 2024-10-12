@@ -17,12 +17,15 @@ class HomeViewModel extends BaseViewModel {
   bool showNavbar = false;
 
   setCurrentNav(int val) {
-    print('set page to ${val}');
-    pageController.animateToPage(val,
-        duration: Duration(milliseconds: 300),
-        curve: Curves.fastEaseInToSlowEaseOut);
-    currentPage = val;
-    rebuildUi();
+    if (val == 0 || val == 2) {
+      print('object');
+      print('set page to ${val}');
+      pageController.animateToPage(val,
+          duration: Duration(milliseconds: 900), curve: Curves.ease);
+      currentPage = val;
+      rebuildUi();
+      return;
+    }
   }
 
   List navIcons = <String>[
@@ -60,22 +63,3 @@ class HomeViewModel extends BaseViewModel {
     appBarAnimationFuntion();
   }
 }
-
-// Row(
-//                   children: [
-//                     model.triggerAppbar
-//                         ? Container()
-//                         : const Icon(
-//                             Icons.location_on,
-//                             color: Appcolor.primaryShade,
-//                           ),
-//                     horizontalSpace(1, context),
-//                     Text(
-//                       // "Saint Petersburg",
-//                       model.triggerAppbar ? '' : "Saint Petersburg",
-//                       style: CustomTextStyles.bodyStyle(
-//                         size: 17,
-//                       ),
-//                     ).paddingOnly(right: context.widthPercent(2)),
-//                   ],
-//                 ),

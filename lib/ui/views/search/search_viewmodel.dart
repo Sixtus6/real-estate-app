@@ -13,8 +13,7 @@ class SearchViewModel extends BaseViewModel {
 
   toggleMenuButton(bool toggle) {
     toggleMenu = toggle;
-    menuHeight = toggle ? 17 : 0;
-    menuWidth = toggle ? 43 : 0;
+
     print('settig');
     rebuildUi();
   }

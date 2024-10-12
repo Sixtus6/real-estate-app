@@ -18,10 +18,9 @@ class HomeView extends StackedView<HomeViewModel> {
     return Stack(
       children: [
         PageView(
+          physics: const NeverScrollableScrollPhysics(),
           controller: viewModel.pageController,
-          onPageChanged: (value) {
-            // viewModel.setCurrentNav(value);
-          },
+          onPageChanged: (value) {},
           children: [
             const SearchView(),
             BaseScaffold(items: const []),
@@ -45,11 +44,6 @@ class HomeView extends StackedView<HomeViewModel> {
             BaseScaffold(items: const []),
           ],
         ),
-        // viewModel.currentPage == 2
-        //     ? stackedBottomSheet(
-        //         model: viewModel,
-        //       )
-        //     : Container(),
         customNavBar(context, viewModel)
       ],
     );

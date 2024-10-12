@@ -68,7 +68,7 @@ class StackButtons extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        GestureDetector(child: buildCircleButton(Icons.layers_outlined, model)),
+        buildCircleButton(Icons.layers_outlined, model),
         SizedBox(height: context.heightPercent(1)),
         buildCircleButton(Icons.explore_outlined, model),
       ],
@@ -88,6 +88,7 @@ class StackButtons extends StatelessWidget {
       child: IconButton(
         icon: Icon(icon, color: Colors.white, size: 30),
         onPressed: () {
+          print('object');
           model.toggleMenuButton(!model.toggleMenu);
         },
       ),
@@ -143,10 +144,13 @@ class OptionsCard extends StatelessWidget {
       child: AnimatedContainer(
         curve: Curves.easeInOut,
         width: context.widthPercent(43),
-        height: context.heightPercent(model.menuHeight),
+        height: model.toggleMenu ? context.heightPercent(model.menuHeight) : 0,
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.9),
+          //
+          color: model.toggleMenu
+              ? Colors.white.withOpacity(0.9)
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(20),
         ),
         duration: Duration(seconds: 1),
