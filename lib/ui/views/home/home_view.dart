@@ -49,23 +49,27 @@ class HomeView extends StackedView<HomeViewModel> {
 }
 
 customNavBar(BuildContext context, HomeViewModel model) {
-  return Align(
-    alignment: Alignment.bottomCenter,
-    child: AnimatedContainer(
-      duration: const Duration(seconds: 3),
-      curve: Curves.ease,
+  return AnimatedPositioned(
+    duration: Duration(seconds: 1),
+    curve: Curves.easeInOut,
+    top: model.showNavbar
+        ? context.heightPercent(88)
+        : context.heightPercent(100),
+    // bottom: context.heightPercent(11),
+    child: Container(
+      width: context.widthPercent(80),
       margin: EdgeInsets.symmetric(
-          horizontal: context.widthPercent(10),
-          vertical: context.heightPercent(3)),
+        horizontal: context.widthPercent(11.3),
+      ),
       padding: EdgeInsets.symmetric(
-          vertical: context.heightPercent(1),
-          horizontal: context.widthPercent(1)),
+        vertical: context.heightPercent(1.5),
+      ),
       decoration: BoxDecoration(
         color: Appcolor.navBarColor,
         borderRadius: BorderRadius.circular(50),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: List.generate(
           model.navIcons.length,
           (index) => CircleAvatar(
@@ -84,6 +88,46 @@ customNavBar(BuildContext context, HomeViewModel model) {
   );
 }
 
+// Align(
+//     alignment: Alignment.bottomCenter,
+//     child: AnimatedPositioned(
+//       duration: Duration(milliseconds: 500),
+//       curve: Curves.easeInOut,
+//       left: context.widthPercent(10),
+//       right: context.widthPercent(10),
+//       bottom: model.showAppbarChildren
+//           ? context.heightPercent(3)
+//           : -context.heightPercent(15),
+//       child: Container(
+//         margin: EdgeInsets.symmetric(
+//             horizontal: context.widthPercent(10),
+//             vertical: context.heightPercent(3)),
+//         padding: EdgeInsets.symmetric(
+//             vertical: context.heightPercent(1),
+//             horizontal: context.widthPercent(1)),
+//         decoration: BoxDecoration(
+//           color: Appcolor.navBarColor,
+//           borderRadius: BorderRadius.circular(50),
+//         ),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceAround,
+//           children: List.generate(
+//             model.navIcons.length,
+//             (index) => CircleAvatar(
+//               radius: index == 2 ? 30 : 25,
+//               backgroundColor:
+//                   index == 2 ? Appcolor.primary : Appcolor.navBarIconColor,
+//               child: Image.asset(
+//                 height: 30,
+//                 width: 30,
+//                 model.navIcons[index],
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     ),
+//   );
 Row contextBody(BuildContext context, HomeViewModel model) {
   return Row(
     children: [
