@@ -6,8 +6,10 @@ import 'package:stacked/stacked.dart';
 
 class HomeViewModel extends BaseViewModel {
   int appbarSecs = 1;
+  int buttomSecs = 2;
   bool triggerAppbar = false;
   bool showAppbarChildren = false;
+  bool showButtomSheet = false;
 
   List navIcons = <String>[
     AppImage.search,
@@ -22,6 +24,10 @@ class HomeViewModel extends BaseViewModel {
     Timer(Duration(seconds: appbarSecs), () {
       showAppbarChildren = triggerAppbar;
       print(showAppbarChildren);
+      rebuildUi();
+    });
+    Timer(Duration(milliseconds: 1800), () {
+      showButtomSheet = triggerAppbar;
       rebuildUi();
     });
     rebuildUi();

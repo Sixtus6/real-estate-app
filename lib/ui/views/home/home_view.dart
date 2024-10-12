@@ -10,7 +10,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:stacked/stacked.dart';
 import 'package:animation_app/ui/common/app_colors.dart';
 import 'package:animation_app/ui/common/ui_helpers.dart';
-
+import 'package:countup/countup.dart' as counter;
 import 'home_viewmodel.dart';
 
 class HomeView extends StackedView<HomeViewModel> {
@@ -30,8 +30,10 @@ class HomeView extends StackedView<HomeViewModel> {
             contextBody(context, viewModel),
           ],
         ),
-        //stackedBottomSheet(),
-        customNavBar(context, viewModel)
+        stackedBottomSheet(
+          model: viewModel,
+        ),
+        //customNavBar(context, viewModel)
       ],
     );
   }
@@ -143,7 +145,7 @@ Row contextBody(BuildContext context, HomeViewModel model) {
 AnimatedContainer cardsWidget(HomeViewModel model, BuildContext context,
     {bool buyCard = false}) {
   return AnimatedContainer(
-    curve: Curves.easeIn,
+    curve: Curves.ease,
     duration: Duration(seconds: model.appbarSecs),
     width: model.showAppbarChildren ? context.widthPercent(43) : 0,
     height: model.showAppbarChildren ? context.heightPercent(20) : 0,
@@ -172,15 +174,17 @@ AnimatedContainer cardsWidget(HomeViewModel model, BuildContext context,
               ),
               SizedBox(
                   height: context.heightPercent(constraints.maxWidth * 0.008)),
-              Text(
-                buyCard ? '1 034' : '2 212',
+              counter.Countup(
+                begin: 0,
+                end: buyCard ? 1034 : 2212,
+                duration: const Duration(seconds: 1),
+                separator: ' ',
                 style: TextStyle(
                   fontSize: constraints.maxWidth * 0.2,
                   color: buyCard ? Colors.white : Appcolor.primaryShade,
                   fontWeight: FontWeight.w900,
                 ),
               ),
-              //   SizedBox(height: context.heightPercent(0.001)),
               Text(
                 'offers',
                 style: TextStyle(
@@ -268,60 +272,64 @@ Row customAppBar(BuildContext context, HomeViewModel model) {
 class stackedBottomSheet extends StatelessWidget {
   const stackedBottomSheet({
     super.key,
+    required this.model,
   });
-
+  final HomeViewModel model;
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: Container(
-        height: context.heightPercent(68),
+      child: AnimatedContainer(
+        height: model.showButtomSheet ? context.heightPercent(68) : 0,
         width: double.infinity,
         decoration: const BoxDecoration(
             color: Appcolor.white,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(40), topRight: Radius.circular(40))),
-        child: Column(
-          children: [
-            const PropertyCardWidget(
-                imagePath: AppImage.house2,
-                address: AppString.house,
-                height: 27,
-                width: double.infinity),
-            verticalSpace(1.3, context),
-            Row(
-              children: [
-                const Column(
-                  children: [
-                    PropertyCardWidget(
-                        imagePath: AppImage.house3,
-                        address: AppString.house3,
-                        height: 37,
-                        width: 45),
-                  ],
-                ),
-                Container().expand(),
-                Column(
-                  children: [
-                    const PropertyCardWidget(
-                        imagePath: AppImage.house,
-                        address: AppString.house1,
-                        height: 18,
-                        width: 47),
-                    verticalSpace(1.2, context),
-                    const PropertyCardWidget(
-                        imagePath: AppImage.house1,
-                        address: AppString.house2,
-                        height: 18,
-                        width: 47),
-                  ],
-                )
-              ],
-            )
-          ],
-        ).paddingSymmetric(
-            horizontal: context.widthPercent(3),
-            vertical: context.heightPercent(1.2)),
+        duration: Duration(milliseconds: 700),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const PropertyCardWidget(
+                  imagePath: AppImage.house2,
+                  address: AppString.house,
+                  height: 27,
+                  width: double.infinity),
+              verticalSpace(1.3, context),
+              Row(
+                children: [
+                  const Column(
+                    children: [
+                      PropertyCardWidget(
+                          imagePath: AppImage.house3,
+                          address: AppString.house3,
+                          height: 37,
+                          width: 45),
+                    ],
+                  ),
+                  Container().expand(),
+                  Column(
+                    children: [
+                      const PropertyCardWidget(
+                          imagePath: AppImage.house,
+                          address: AppString.house1,
+                          height: 18,
+                          width: 47),
+                      verticalSpace(1.2, context),
+                      const PropertyCardWidget(
+                          imagePath: AppImage.house1,
+                          address: AppString.house2,
+                          height: 18,
+                          width: 47),
+                    ],
+                  )
+                ],
+              )
+            ],
+          ).paddingSymmetric(
+              horizontal: context.widthPercent(3),
+              vertical: context.heightPercent(1.2)),
+        ),
       ),
     );
   }
