@@ -10,6 +10,8 @@ class HomeViewModel extends BaseViewModel {
   bool triggerAppbar = false;
   bool showAppbarChildren = false;
   bool showButtomSheet = false;
+  bool showPropertyScroller = false;
+  bool showNavbar = false;
 
   List navIcons = <String>[
     AppImage.search,
@@ -28,6 +30,14 @@ class HomeViewModel extends BaseViewModel {
     });
     Timer(Duration(milliseconds: 1800), () {
       showButtomSheet = triggerAppbar;
+      rebuildUi();
+    });
+    Timer(Duration(milliseconds: 2000), () {
+      showPropertyScroller = triggerAppbar;
+      rebuildUi();
+    });
+    Timer(Duration(milliseconds: 2500), () {
+      showNavbar = triggerAppbar;
       rebuildUi();
     });
     rebuildUi();

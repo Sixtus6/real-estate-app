@@ -33,7 +33,7 @@ class HomeView extends StackedView<HomeViewModel> {
         stackedBottomSheet(
           model: viewModel,
         ),
-        //customNavBar(context, viewModel)
+        customNavBar(context, viewModel)
       ],
     );
   }
@@ -51,7 +51,9 @@ class HomeView extends StackedView<HomeViewModel> {
 customNavBar(BuildContext context, HomeViewModel model) {
   return Align(
     alignment: Alignment.bottomCenter,
-    child: Container(
+    child: AnimatedContainer(
+      duration: const Duration(seconds: 3),
+      curve: Curves.ease,
       margin: EdgeInsets.symmetric(
           horizontal: context.widthPercent(10),
           vertical: context.heightPercent(3)),
@@ -290,37 +292,44 @@ class stackedBottomSheet extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const PropertyCardWidget(
-                  imagePath: AppImage.house2,
-                  address: AppString.house,
-                  height: 27,
-                  width: double.infinity),
+              PropertyCardWidget(
+                imagePath: AppImage.house2,
+                address: AppString.house,
+                height: 27,
+                width: double.infinity,
+                model: model,
+              ),
               verticalSpace(1.3, context),
               Row(
                 children: [
-                  const Column(
+                  Column(
                     children: [
                       PropertyCardWidget(
-                          imagePath: AppImage.house3,
-                          address: AppString.house3,
-                          height: 37,
-                          width: 45),
+                        imagePath: AppImage.house3,
+                        address: AppString.house3,
+                        height: 37,
+                        width: 45,
+                        model: model,
+                      ),
                     ],
                   ),
                   Container().expand(),
                   Column(
                     children: [
-                      const PropertyCardWidget(
+                      PropertyCardWidget(
+                          model: model,
                           imagePath: AppImage.house,
                           address: AppString.house1,
                           height: 18,
                           width: 47),
                       verticalSpace(1.2, context),
-                      const PropertyCardWidget(
-                          imagePath: AppImage.house1,
-                          address: AppString.house2,
-                          height: 18,
-                          width: 47),
+                      PropertyCardWidget(
+                        imagePath: AppImage.house1,
+                        address: AppString.house2,
+                        height: 18,
+                        width: 47,
+                        model: model,
+                      ),
                     ],
                   )
                 ],
