@@ -60,23 +60,8 @@ class HomeView extends StackedView<HomeViewModel> {
     BuildContext context,
   ) =>
       HomeViewModel();
+
   @override
   void onViewModelReady(HomeViewModel viewModel) => SchedulerBinding.instance
       .addPostFrameCallback((timeStamp) => viewModel.init());
 }
-
-
-    // viewModel.defaultNav == 2
-    //         ? BaseScaffold(
-    //             isHome: true,
-    //             items: [
-    //               customAppBar(context, viewModel),
-    //               contextBody(context, viewModel),
-    //             ],
-    //           )
-    //         : BaseScaffold(items: []),
-    //     viewModel.defaultNav == 2
-    //         ? stackedBottomSheet(
-    //             model: viewModel,
-    //           )
-    //         : Container(),

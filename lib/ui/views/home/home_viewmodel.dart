@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:animation_app/ui/common/app_image.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +56,7 @@ class HomeViewModel extends BaseViewModel {
   }
 
   init() {
+    log('Init Homescreen');
     appBarAnimationFuntion();
   }
 }
