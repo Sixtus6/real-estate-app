@@ -1,36 +1,52 @@
-import 'package:animation_app/app/app.bottomsheets.dart';
-import 'package:animation_app/app/app.dialogs.dart';
-import 'package:animation_app/app/app.locator.dart';
-import 'package:animation_app/ui/common/app_strings.dart';
+import 'dart:async';
+
+import 'package:animation_app/ui/common/app_image.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 class HomeViewModel extends BaseViewModel {
-  final _dialogService = locator<DialogService>();
-  final _bottomSheetService = locator<BottomSheetService>();
+  int appbarSecs = 1;
+  bool triggerAppbar = false;
+  bool showAppbarChildren = false;
 
-  String get counterLabel => 'Counter is: $_counter';
+  List navIcons = <String>[
+    AppImage.search,
+    AppImage.messg,
+    AppImage.home,
+    AppImage.heart,
+    AppImage.usericon
+  ];
 
-  int _counter = 0;
-
-  void incrementCounter() {
-    _counter++;
+  appBarAnimationFuntion() {
+    triggerAppbar = true;
+    Timer(Duration(seconds: appbarSecs), () {
+      showAppbarChildren = triggerAppbar;
+      print(showAppbarChildren);
+      rebuildUi();
+    });
     rebuildUi();
   }
 
-  void showDialog() {
-    _dialogService.showCustomDialog(
-      variant: DialogType.infoAlert,
-      title: 'Stacked Rocks!',
-      description: 'Give stacked $_counter stars on Github',
-    );
-  }
-
-  void showBottomSheet() {
-    _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.notice,
-      title: AppString.ksHomeBottomSheetTitle,
-      description: 'ksHomeBottomSheetDescription',
-    );
+  init() {
+    appBarAnimationFuntion();
   }
 }
+
+
+// Row(
+//                   children: [
+//                     model.triggerAppbar
+//                         ? Container()
+//                         : const Icon(
+//                             Icons.location_on,
+//                             color: Appcolor.primaryShade,
+//                           ),
+//                     horizontalSpace(1, context),
+//                     Text(
+//                       // "Saint Petersburg",
+//                       model.triggerAppbar ? '' : "Saint Petersburg",
+//                       style: CustomTextStyles.bodyStyle(
+//                         size: 17,
+//                       ),
+//                     ).paddingOnly(right: context.widthPercent(2)),
+//                   ],
+//                 ),

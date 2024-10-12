@@ -17,4 +17,6 @@ class Appcolor {
   static const Color linearGradientGray = Color(0xFFd0cac7);
   static const Color linearWhitecolor = Color(0xffc2bfba);
   static const Color linearDarkColor = Color(0xFF95836f);
+  static const Color navBarColor = Color(0xff25252a);
+  static const Color navBarIconColor = Color(0xff1d1c22);
 }
