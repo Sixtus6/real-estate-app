@@ -44,7 +44,7 @@ class PropertyCardWidget extends StatelessWidget {
                     : context.heightPercent(6.6),
                 // height:
                 //     model.showPropertyScroller ? context.heightPercent(7) : 0,
-                duration: Duration(milliseconds: 700),
+                duration: Duration(milliseconds: height == 27 ? 700 : 1500),
                 margin: EdgeInsets.symmetric(
                     horizontal: context.widthPercent(2),
                     vertical: context.heightPercent(1.3)),
