@@ -30,7 +30,7 @@ class HomeView extends StackedView<HomeViewModel> {
             contextBody(context, viewModel),
           ],
         ),
-        stackedBottomSheet(),
+        //stackedBottomSheet(),
         customNavBar(context, viewModel)
       ],
     );
@@ -128,84 +128,10 @@ Row contextBody(BuildContext context, HomeViewModel model) {
           verticalSpace(5.1, context),
           Row(
             children: [
-              Container(
-                width: context.widthPercent(42),
-                height: context.heightPercent(20),
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Appcolor.primary,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'BUY',
-                      style: CustomTextStyles.bodyStyle(
-                          size: 17,
-                          // fontWeight: FontWeight.bold,
-                          color: Appcolor.white),
-                    ),
-                    SizedBox(height: context.heightPercent(2)),
-                    const Text(
-                      '1 034',
-                      style: TextStyle(
-                        fontSize: 40,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    SizedBox(height: context.heightPercent(0.001)),
-                    const Text(
-                      'offers',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              cardsWidget(model, context, buyCard: true),
               //Container().expand(),'
-              horizontalSpace(5, context),
-              Container(
-                width: context.widthPercent(45),
-                height: context.heightPercent(20),
-                decoration: BoxDecoration(
-                  color: Appcolor.white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text(
-                      'RENT',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Appcolor.primaryShade,
-                      ),
-                    ),
-                    SizedBox(height: context.heightPercent(2)),
-                    const Text(
-                      '2 212',
-                      style: TextStyle(
-                        fontSize: 40,
-                        color: Appcolor.primaryShade,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    SizedBox(height: context.heightPercent(0.001)),
-                    const Text(
-                      'offers',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Appcolor.primaryShade,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              horizontalSpace(6, context),
+              cardsWidget(model, context),
             ],
           ),
         ],
@@ -214,47 +140,102 @@ Row contextBody(BuildContext context, HomeViewModel model) {
   );
 }
 
+AnimatedContainer cardsWidget(HomeViewModel model, BuildContext context,
+    {bool buyCard = false}) {
+  return AnimatedContainer(
+    curve: Curves.easeIn,
+    duration: Duration(seconds: model.appbarSecs),
+    width: model.showAppbarChildren ? context.widthPercent(43) : 0,
+    height: model.showAppbarChildren ? context.heightPercent(20) : 0,
+    decoration: buyCard
+        ? BoxDecoration(
+            shape: BoxShape.circle,
+            color: !buyCard ? Appcolor.white : Appcolor.primary,
+          )
+        : BoxDecoration(
+            color: Appcolor.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+    child: LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Visibility(
+          visible: model.showAppbarChildren,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                buyCard ? 'BUY' : 'RENT',
+                style: CustomTextStyles.bodyStyle(
+                  size: constraints.maxWidth * 0.1,
+                  color: buyCard ? Appcolor.white : Appcolor.primaryShade,
+                ),
+              ),
+              SizedBox(
+                  height: context.heightPercent(constraints.maxWidth * 0.008)),
+              Text(
+                buyCard ? '1 034' : '2 212',
+                style: TextStyle(
+                  fontSize: constraints.maxWidth * 0.2,
+                  color: buyCard ? Colors.white : Appcolor.primaryShade,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              //   SizedBox(height: context.heightPercent(0.001)),
+              Text(
+                'offers',
+                style: TextStyle(
+                  fontSize: constraints.maxWidth * 0.09,
+                  color: buyCard ? Appcolor.white : Appcolor.primaryShade,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    ),
+  );
+}
+
 Row customAppBar(BuildContext context, HomeViewModel model) {
   return Row(
     children: [
-      GestureDetector(
-          onTap: () {
-            model.appBarAnimationFuntion();
-          },
-          child: AnimatedContainer(
-            duration: Duration(seconds: model.appbarSecs),
-            curve: Curves.easeInOut,
-            width: !model.triggerAppbar ? 0 : 180,
-            decoration: BoxDecoration(
-              color: Appcolor.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: context.widthPercent(3),
-                vertical: context.heightPercent(2),
-              ),
-              child: AnimatedOpacity(
-                opacity: model.showAppbarChildren ? 1.0 : 0.0,
-                duration: Duration(seconds: 1),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.location_on,
-                      color: Appcolor.primaryShade,
-                    ),
-                    horizontalSpace(1, context),
-                    Text(
-                      "Saint Petersbur",
-                      style: CustomTextStyles.bodyStyle(
-                        size: 17,
-                      ),
-                    ).paddingOnly(right: context.widthPercent(2)),
-                  ],
+      AnimatedContainer(
+        duration: Duration(seconds: model.appbarSecs),
+        curve: Curves.easeInOut,
+        width: !model.triggerAppbar ? 0 : context.widthPercent(42),
+        decoration: BoxDecoration(
+          color: Appcolor.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: context.widthPercent(3),
+            vertical: context.heightPercent(2),
+          ),
+          child: AnimatedOpacity(
+            opacity: model.showAppbarChildren ? 1.0 : 0.0,
+            duration: Duration(seconds: 1),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.location_on,
+                  color: Appcolor.primaryShade,
                 ),
-              ),
+                horizontalSpace(1, context),
+                Text(
+                  "Saint Petersbur",
+                  style: CustomTextStyles.bodyStyle(
+                    size: 17,
+                  ),
+                ).paddingOnly(right: context.widthPercent(2)),
+              ],
             ),
-          )),
+          ),
+        ),
+      ),
       Container().expand(),
       AnimatedContainer(
         curve: Curves.easeInOut,
@@ -345,3 +326,55 @@ class stackedBottomSheet extends StatelessWidget {
     );
   }
 }
+
+
+
+
+              // AnimatedContainer(
+              //   curve: Curves.easeInOut,
+              //   duration: Duration(seconds: model.appbarSecs),
+              //   width: model.showAppbarChildren ? context.widthPercent(43) : 0,
+              //   height:
+              //       model.showAppbarChildren ? context.heightPercent(20) : 0,
+              //   decoration: BoxDecoration(
+              //     color: Appcolor.white,
+              //     borderRadius: BorderRadius.circular(20),
+              //   ),
+              //   child: LayoutBuilder(
+              //     builder: (BuildContext context, BoxConstraints constraints) {
+              //       return Visibility(
+              //         visible: model.showAppbarChildren,
+              //         child: Column(
+              //           mainAxisAlignment: MainAxisAlignment.center,
+              //           children: <Widget>[
+              //             Text('RENT',
+              //                 style: CustomTextStyles.bodyStyle(
+              //                   size: constraints.maxWidth * 0.1,
+              //                 )),
+              //             SizedBox(
+              //                 height: context
+              //                     .heightPercent(constraints.maxWidth * 0.008)),
+              //             const Text(
+              //               '2 212',
+              //               style: TextStyle(
+              //                 fontSize: 40,
+              //                 color: Appcolor.primaryShade,
+              //                 fontWeight: FontWeight.w800,
+              //               ),
+              //             ),
+              //             SizedBox(height: context.heightPercent(0.001)),
+              //             const Text(
+              //               'offers',
+              //               style: TextStyle(
+              //                 fontSize: 16,
+              //                 color: Appcolor.primaryShade,
+              //                 fontWeight: FontWeight.w500,
+              //               ),
+              //             ),
+              //           ],
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // ),
+          

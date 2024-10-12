@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:animation_app/ui/common/app_image.dart';
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 class HomeViewModel extends BaseViewModel {
