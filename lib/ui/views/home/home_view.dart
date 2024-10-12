@@ -1,4 +1,5 @@
-import 'package:animation_app/ui/views/home/home_component.dart';
+import 'package:animation_app/ui/views/home/home_widget.dart';
+import 'package:animation_app/ui/views/search/search_view.dart';
 import 'package:animation_app/ui/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -16,15 +17,39 @@ class HomeView extends StackedView<HomeViewModel> {
   ) {
     return Stack(
       children: [
-        BaseScaffold(
-          items: [
-            customAppBar(context, viewModel),
-            contextBody(context, viewModel),
+        PageView(
+          controller: viewModel.pageController,
+          onPageChanged: (value) {
+            // viewModel.setCurrentNav(value);
+          },
+          children: [
+            const SearchView(),
+            BaseScaffold(items: const []),
+            Stack(
+              children: [
+                BaseScaffold(
+                  isHome: true,
+                  items: [
+                    customAppBar(context, viewModel),
+                    contextBody(context, viewModel),
+                  ],
+                ),
+                viewModel.currentPage == 2
+                    ? stackedBottomSheet(
+                        model: viewModel,
+                      )
+                    : Container(),
+              ],
+            ),
+            BaseScaffold(items: const []),
+            BaseScaffold(items: const []),
           ],
         ),
-        stackedBottomSheet(
-          model: viewModel,
-        ),
+        // viewModel.currentPage == 2
+        //     ? stackedBottomSheet(
+        //         model: viewModel,
+        //       )
+        //     : Container(),
         customNavBar(context, viewModel)
       ],
     );
@@ -39,3 +64,19 @@ class HomeView extends StackedView<HomeViewModel> {
   void onViewModelReady(HomeViewModel viewModel) => SchedulerBinding.instance
       .addPostFrameCallback((timeStamp) => viewModel.init());
 }
+
+
+    // viewModel.defaultNav == 2
+    //         ? BaseScaffold(
+    //             isHome: true,
+    //             items: [
+    //               customAppBar(context, viewModel),
+    //               contextBody(context, viewModel),
+    //             ],
+    //           )
+    //         : BaseScaffold(items: []),
+    //     viewModel.defaultNav == 2
+    //         ? stackedBottomSheet(
+    //             model: viewModel,
+    //           )
+    //         : Container(),

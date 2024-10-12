@@ -8,10 +8,10 @@ class CustomTextStyles {
     FontWeight fontWeight = FontWeight.w400,
   }) {
     return TextStyle(
-      // height: 1,
-      fontSize: size,
-      fontWeight: fontWeight,
-      color: color,
-    );
+        // height: 1,
+        fontSize: size,
+        fontWeight: fontWeight,
+        color: color,
+        decoration: TextDecoration.none);
   }
 }

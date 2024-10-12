@@ -12,10 +12,10 @@ import 'package:countup/countup.dart' as counter;
 
 customNavBar(BuildContext context, HomeViewModel model) {
   return AnimatedPositioned(
-    duration: Duration(seconds: 1),
+    duration: const Duration(seconds: 1),
     curve: Curves.easeInOut,
     top: model.showNavbar
-        ? context.heightPercent(88)
+        ? context.heightPercent(90)
         : context.heightPercent(100),
     // bottom: context.heightPercent(11),
     child: Container(
@@ -24,7 +24,7 @@ customNavBar(BuildContext context, HomeViewModel model) {
         horizontal: context.widthPercent(11.3),
       ),
       padding: EdgeInsets.symmetric(
-        vertical: context.heightPercent(1.5),
+        vertical: context.heightPercent(0.7),
       ),
       decoration: BoxDecoration(
         color: Appcolor.navBarColor,
@@ -39,13 +39,13 @@ customNavBar(BuildContext context, HomeViewModel model) {
               model.setCurrentNav(index);
             },
             child: CircleAvatar(
-              radius: index == model.defaultNav ? 30 : 25,
-              backgroundColor: index == model.defaultNav
+              radius: index == model.currentPage ? 27 : 20,
+              backgroundColor: index == model.currentPage
                   ? Appcolor.primary
                   : Appcolor.navBarIconColor,
               child: Image.asset(
-                height: 30,
-                width: 30,
+                height: 25,
+                width: 25,
                 model.navIcons[index],
               ),
             ),

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 class HomeViewModel extends BaseViewModel {
+  PageController pageController = PageController(initialPage: 2);
+  int currentPage = 2;
   int appbarSecs = 1;
   int buttomSecs = 2;
   bool triggerAppbar = false;
@@ -13,10 +15,12 @@ class HomeViewModel extends BaseViewModel {
   bool showPropertyScroller = false;
   bool showNavbar = false;
 
-  int defaultNav = 2;
-
   setCurrentNav(int val) {
-    defaultNav = val;
+    print('set page to ${val}');
+    pageController.animateToPage(val,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.fastEaseInToSlowEaseOut);
+    currentPage = val;
     rebuildUi();
   }
 
@@ -54,7 +58,6 @@ class HomeViewModel extends BaseViewModel {
     appBarAnimationFuntion();
   }
 }
-
 
 // Row(
 //                   children: [

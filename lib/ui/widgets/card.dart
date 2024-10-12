@@ -82,8 +82,8 @@ class PropertyCardWidget extends StatelessWidget {
                     CircleAvatar(
                       radius: height == 27 ? 30 : 23,
                       backgroundColor: Appcolor.white,
-                      child: Center(
-                        child: const Icon(
+                      child: const Center(
+                        child: Icon(
                           Icons.arrow_forward_ios,
                           size: 16,
                           color: Colors.grey,
@@ -99,9 +99,8 @@ class PropertyCardWidget extends StatelessWidget {
   }
 }
 
-
-   /// width: model.showPropertyScroller ? context.widthPercent(90) : 0,
-   /// 
-  //  / //.paddingSymmetric(
-  //                 horizontal: context.widthPercent(1),
-  //                 vertical: context.heightPercent(0.4)),
+/// width: model.showPropertyScroller ? context.widthPercent(90) : 0,
+///
+//  / //.paddingSymmetric(
+//                 horizontal: context.widthPercent(1),
+//                 vertical: context.heightPercent(0.4)),
